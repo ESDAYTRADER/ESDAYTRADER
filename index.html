@@ -18,9 +18,10 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .meta{color:var(--mute);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
 .hero{padding:44px 0 14px}
 .hero + h2{margin-top:26px}
-.hero-head{margin-bottom:30px}
+.toprow{display:grid;grid-template-columns:1fr 1fr;align-items:end;margin-bottom:20px}
+.hero-head{padding-right:44px}
 .eyebrow{color:var(--brass);font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
-.name{font:400 clamp(40px,6.2vw,84px)/1 Newsreader,Georgia,serif;margin:0;letter-spacing:-.02em}
+.name{font:400 clamp(34px,4.6vw,66px)/1 Newsreader,Georgia,serif;margin:0;letter-spacing:-.02em}
 .result{position:relative;background:var(--panel);border:1px solid var(--line);padding:30px 32px 22px}
 .result::before{content:"";position:absolute;left:-1px;top:-1px;width:64px;height:2px;background:var(--brass)}
 .rl{display:flex;align-items:center;gap:14px;color:var(--brass);font-size:12px;letter-spacing:.22em;text-transform:uppercase}
@@ -32,7 +33,7 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .nb{white-space:nowrap}
 .spec{margin-top:20px}
 .rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.rgrid.two{margin-bottom:20px}
+.rgrid.two{grid-template-columns:1fr}
 #cap{grid-template-columns:repeat(6,1fr)}
 .rgrid > div{background:var(--panel);padding:16px 18px 18px}
 .rgrid > div > span{display:block;font:500 10.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:9px}
@@ -116,6 +117,8 @@ th:first-child{left:0;z-index:2}
 td:first-child{position:sticky;left:0;background:var(--bg)}
 html{-webkit-text-size-adjust:100%}
 @media (max-width:1100px){
+  .toprow{grid-template-columns:1fr;gap:22px}
+  .hero-head{padding-right:0}
   #cap{grid-template-columns:repeat(3,1fr)}
   .rtop{grid-template-columns:1fr}
   .rleft{padding-right:0}
@@ -155,11 +158,13 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:v
 </header>
 
 <section class="hero">
-  <div class="hero-head">
-    <div class="eyebrow" id="eyebrow"></div>
-    <h1 class="name" id="name"></h1>
+  <div class="toprow">
+    <div class="hero-head">
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 class="name" id="name"></h1>
+    </div>
+    <div class="rgrid two" id="fixed"></div>
   </div>
-  <div class="rgrid two" id="fixed"></div>
   <div class="result">
     <div class="rtop">
       <div class="rleft">
