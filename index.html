@@ -72,9 +72,9 @@ a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline
 .instbox summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 4px;transition:transform .2s}
 .instbox[open] .chev{transform:rotate(-135deg);margin-top:3px}
-.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(860px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:block;margin:0;padding:20px 24px 16px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(1020px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:block;margin:0;padding:20px 24px 16px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
 .gnote{color:var(--mute);font-size:11px;margin:0 0 10px}
-.ug{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.ug{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .uc{background:var(--panel);padding:14px 16px 12px}
 .ut{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
 .us{color:var(--mute);font-size:10.5px;line-height:1.4;margin:4px 0 10px;min-height:30px}
@@ -128,6 +128,7 @@ html{-webkit-text-size-adjust:100%}
   .isw .rgrid.two > div{margin:0;padding:16px 0}
 }
 @media (max-width:900px){
+  .ug{grid-template-columns:repeat(3,1fr)}
   .instbox{position:static}
   .rl .groups{left:0;right:0;width:auto;top:64px}
 }
@@ -245,11 +246,13 @@ const CONFIG = {
         { sym: "FBTP", name: "Euro-BTP, Италия", href: "" },
         { sym: "FOAT", name: "Euro-OAT, Франция", href: "" }
       ] },
-      { title: "Опционы · индексы и ETF", sub: "в том числе 0DTE (экспирация в день торговли)", items: [
-        { sym: "SPX", name: "Индекс S&P 500", href: "" },
-        { sym: "SPY", name: "ETF S&P 500", href: "" },
-        { sym: "QQQ", name: "ETF Nasdaq-100", href: "" },
-        { sym: "DIA", name: "ETF Dow Jones", href: "" }
+      { title: "Опционы · индексы", sub: "0DTE — где доступно", items: [
+        { sym: "SPX", name: "S&P 500", href: "" }
+      ] },
+      { title: "Опционы · ETF", sub: "0DTE — где доступно", items: [
+        { sym: "SPY", name: "S&P 500", href: "" },
+        { sym: "QQQ", name: "Nasdaq-100", href: "" },
+        { sym: "DIA", name: "Dow Jones", href: "" }
       ] },
       { title: "Опционы · акции", sub: "Ликвидные акции США", items: [
         { sym: "TSLA", name: "Tesla", href: "" },
