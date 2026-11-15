@@ -18,8 +18,6 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .meta{color:var(--mute);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
 .hero{padding:44px 0 14px}
 .hero + h2{margin-top:26px}
-.toprow{display:grid;grid-template-columns:1fr 1fr;align-items:end;margin-bottom:20px}
-.hero-head{padding-right:44px}
 .eyebrow{color:var(--brass);font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
 .name{font:400 clamp(34px,4.6vw,66px)/1 Newsreader,Georgia,serif;margin:0;letter-spacing:-.02em}
 .result{position:relative;background:var(--panel);border:1px solid var(--line);padding:30px 32px 22px}
@@ -46,7 +44,7 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .rinst{font-style:normal;text-transform:none;letter-spacing:0;font-size:14px;color:var(--mute)}
 .rtop{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
 .rleft{padding-right:44px}
-.isw{border-left:1px solid var(--line);padding-left:44px}
+.isw{border-left:1px solid var(--line);padding-left:44px;display:flex;flex-direction:column;justify-content:center}
 .ig{display:flex;align-items:center;gap:14px;margin-top:16px}
 .gl{flex:none;width:122px;white-space:nowrap;font:500 10.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -63,7 +61,10 @@ a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline
 #total small{font-size:.32em;margin-left:.3em}
 .instbox summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:0}
 .instbox summary::-webkit-details-marker{display:none}
-.instbox summary b{margin-right:0}
+.instbox{position:relative}
+.instbox summary.tag{display:flex;align-items:center;gap:8px;padding:2px 9px}
+.instbox summary b{margin-right:0;font-weight:400;color:var(--ink)}
+.rl .groups{left:0;right:auto}
 .instbox summary:hover,.instbox summary:hover b,.instbox[open] summary b{color:var(--brass)}
 .instbox summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 4px;transition:transform .2s}
@@ -117,14 +118,14 @@ th:first-child{left:0;z-index:2}
 td:first-child{position:sticky;left:0;background:var(--bg)}
 html{-webkit-text-size-adjust:100%}
 @media (max-width:1100px){
-  .toprow{grid-template-columns:1fr;gap:22px}
-  .hero-head{padding-right:0}
   #cap{grid-template-columns:repeat(3,1fr)}
   .rtop{grid-template-columns:1fr}
   .rleft{padding-right:0}
   .isw{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
 }
 @media (max-width:900px){
+  .instbox{position:static}
+  .rl .groups{left:0;right:0;width:auto;top:64px}
 }
 @media (max-width:860px){
   .hero{padding:32px 0 10px}
@@ -158,21 +159,14 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:v
 </header>
 
 <section class="hero">
-  <div class="toprow">
-    <div class="hero-head">
-      <div class="eyebrow" id="eyebrow"></div>
-      <h1 class="name" id="name"></h1>
-    </div>
-    <div class="rgrid two" id="fixed"></div>
-  </div>
   <div class="result">
     <div class="rtop">
       <div class="rleft">
-        <div class="rl"><span>Результат</span><i class="tag">ES</i><em class="rinst" id="rinst"></em></div>
+        <div class="rl"><span>Результат</span><details class="instbox" id="instbox"><summary class="tag"><b id="curInst"></b><i class="chev"></i></summary><div class="groups" id="insts"></div></details><em class="rinst" id="rinst"></em></div>
         <div class="numrow"><div class="num" id="total">—</div><div class="tk" id="tk"></div></div>
         <div class="status" id="status"></div>
       </div>
-      <div class="isw" id="isw"></div>
+      <div class="isw" id="isw"><div class="rgrid two" id="fixed"></div></div>
     </div>
   </div>
   <div class="spec"><div class="rgrid" id="cap"></div></div>
@@ -226,7 +220,7 @@ const CONFIG = {
     ledeMain: "Внутридневной скальпинг",
     executionLabel: "Подход к исполнению",
     execution: "Дискреционное исполнение по системным правилам",
-    showInstruments: false,   // true — вернуть выпадающий список «Инструмент» с фьючерсами и опционами
+    showSwitcher: false,   // true — показать плитки инструментов (ES, NQ, YM ...) в правой части карточки
     terms: [["TP", "10 тиков ($125)"], ["SL", "20 тиков ($250)"]],
     specs: [["Торговое окно", "09:30–11:00 ET, <span class=\"nb\">Нью-Йорк</span>"], ["Объём", "1 контракт, без реинвестирования"], ["Стоимость тика", "$12,50"], ["Комиссия", "$4 за сделку, учтена"]],
     // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
@@ -650,21 +644,18 @@ async function load() {
 function renderIntro() {
   const S = CONFIG.strategy;
   document.title = S.name + " — результаты";
-  $("eyebrow").textContent = S.eyebrow; $("name").textContent = S.name;
   const live = S.groups.flatMap(g => g.items).find(i => i.live) || {};
   $("rinst").textContent = live.name ? `(Фьючерс на ${live.name})` : "";   // что за инструмент — в строке заголовка результата
+  $("curInst").textContent = live.sym || "";
   $("fixed").innerHTML = [[S.typeLabel, S.ledeMain], [S.executionLabel, S.execution]].map(c => `<div><span>${c[0]}</span><b>${c[1]}</b></div>`).join("");   // статичные описания стратегии
   const cells = [["Период", `<b id="period">—</b>`]].concat(S.specs.map(p => [p[0], `<b>${p[1]}</b>`]));
   cells.push(["Условия сделки", S.terms.map(t => `<p class="sp"><i>${t[0]}</i><b>${t[1]}</b></p>`).join("")]);
-  if (S.showInstruments) cells.push(["Инструмент", `<details class="instbox" id="instbox"><summary><b id="curInst"></b><i class="chev"></i></summary><div class="groups" id="insts"></div></details>`]);
   $("cap").innerHTML = cells.map(c => `<div><span>${c[0]}</span>${c[1]}</div>`).join("");
   // переключатель инструментов: ссылка работает, как только у инструмента появляется href
   const chip = i => i.live ? `<span class="ic on" aria-current="page" title="${i.name}">${i.sym}</span>`
     : i.href ? `<a class="ic" href="${i.href}" title="${i.name}">${i.sym}</a>` : `<span class="ic off" title="${i.name}">${i.sym}</span>`;
-  $("isw").innerHTML = `<div class="rl"><span>Инструменты</span></div>` +
-    S.groups.map(g => `<div class="ig"><span class="gl">${g.title}</span><div class="chips">${g.items.map(chip).join("")}</div></div>`).join("");
-  if (!S.showInstruments) return;
-  $("curInst").textContent = (S.groups.flatMap(g => g.items).find(i => i.live) || {}).sym || "";
+  if (S.showSwitcher) $("isw").insertAdjacentHTML("afterbegin", `<div class="rl"><span>Инструменты</span></div>` +
+    S.groups.map(g => `<div class="ig"><span class="gl">${g.title}</span><div class="chips">${g.items.map(chip).join("")}</div></div>`).join(""));
   const row = (k, v) => `<div><dt>${k}</dt><dd>${v || "—"}</dd></div>`;
   const card = (i, lbl) => {
     const tag = i.href ? "a" : "div", chip = i.live ? "Результаты ниже" : i.href ? "Статистика →" : "Скоро";
