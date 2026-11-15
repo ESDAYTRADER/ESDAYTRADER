@@ -72,20 +72,23 @@ a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline
 .instbox summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 4px;transition:transform .2s}
 .instbox[open] .chev{transform:rotate(-135deg);margin-top:3px}
-.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(640px,calc(100vw - 28px));display:grid;grid-template-columns:1fr;gap:18px;margin:0;padding:18px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
-.grp h3{font:500 11px "IBM Plex Sans",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:0 0 4px}
-.gnote{color:var(--mute);font-size:12px;margin:0 0 12px}
-.icards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(780px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:grid;grid-template-columns:1fr;gap:18px;margin:0;padding:18px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.grp h3{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:0 0 4px}
+.gnote{color:var(--mute);font-size:11px;margin:0 0 10px}
+.icards{display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .inst{background:var(--panel);padding:12px 14px 8px;color:inherit;text-decoration:none;display:block}
 a.inst:hover{background:#18303f}
 .inst.live{box-shadow:inset 2px 0 0 var(--brass)}
 .ih{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.sym{font:400 22px Newsreader,Georgia,serif}
-.chip{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);padding:2px 8px;white-space:nowrap}
+.sym{font:400 19px Newsreader,Georgia,serif}
+.gh{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.gt{font:400 16px Newsreader,Georgia,serif;color:var(--ink)}
+.gh .gnote{margin:4px 0 0}
+.chip{font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);padding:2px 8px;white-space:nowrap}
 .live .chip{color:var(--brass);border-color:var(--brass)}
-.iname{color:var(--mute);font-size:12px;margin:2px 0 10px}
+.iname{color:var(--mute);font-size:11px;margin:2px 0 8px}
 .inst dl{margin:0}
-.inst dl div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:4px 0;font-size:11.5px}
+.inst dl div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:3px 0;font-size:10.5px}
 .inst dt{color:var(--mute)}
 .inst dd{margin:0;text-align:right}
 .pos{color:var(--gain)}.neg{color:var(--loss)}
@@ -228,17 +231,36 @@ const CONFIG = {
     terms: [["TP", "10 тиков ($125)"], ["SL", "20 тиков ($250)"]],
     specs: [["Торговое окно", "09:30–11:00 ET, <span class=\"nb\">Нью-Йорк</span>"], ["Объём", "1 контракт, без реинвестирования"], ["Стоимость тика", "$12,50"], ["Комиссия", "$4 за сделку, учтена"]],
     // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
+    scaleTitle: "Масштабирование стратегии для фондов и инвесторов",
+    scaleNote: "Потенциальная сетка инструментов. Результаты на странице — только по ES.",
     groups: [
-      { title: "Фьючерсы", tickLabel: "Тик", note: "CME · торговля 09:30–11:00 ET", items: [
+      { title: "Фьючерсы CME", tickLabel: "Тик", note: "Торговое окно 09:30–11:00 ET", items: [
         { sym: "ES", name: "E-mini S&P 500", tick: "0,25 пт = $12,50", stop: "20 тиков · $250", take: "10 тиков · $125", live: true, href: "" },
         { sym: "NQ", name: "E-mini Nasdaq-100", tick: "0,25 пт = $5,00", stop: "", take: "", href: "" },
         { sym: "YM", name: "E-mini Dow Jones", tick: "1 пт = $5,00", stop: "", take: "", href: "" }
       ] },
-      { title: "Опционы 0DTE", tickLabel: "Контракт", note: "Экспирация в день торговли (0DTE) · 09:30–11:00 ET", items: [
+      { title: "Фьючерсы Eurex", tickLabel: "Контракт", note: "Индексы и государственные облигации Европы", items: [
+        { sym: "FDAX", name: "DAX", tick: "€25 за пункт", stop: "", take: "", href: "" },
+        { sym: "FESX", name: "EURO STOXX 50", tick: "€10 за пункт", stop: "", take: "", href: "" },
+        { sym: "FGBL", name: "Euro-Bund (Германия, ~10 лет)", tick: "0,01% = €10", stop: "", take: "", href: "" },
+        { sym: "FBTP", name: "Euro-BTP (Италия, ~10 лет)", tick: "0,01% = €10", stop: "", take: "", href: "" },
+        { sym: "FOAT", name: "Euro-OAT (Франция, ~10 лет)", tick: "0,01% = €10", stop: "", take: "", href: "" }
+      ] },
+      { title: "Опционы 0DTE", tickLabel: "Контракт", note: "Экспирация в день торговли", items: [
         { sym: "SPX", name: "Индекс S&P 500", tick: "×$100", stop: "", take: "", href: "" },
         { sym: "SPY", name: "ETF S&P 500", tick: "×100 акций", stop: "", take: "", href: "" },
         { sym: "QQQ", name: "ETF Nasdaq-100", tick: "×100 акций", stop: "", take: "", href: "" },
         { sym: "DIA", name: "ETF Dow Jones", tick: "×100 акций", stop: "", take: "", href: "" }
+      ] },
+      { title: "Опционы на акции", tickLabel: "Контракт", note: "Ликвидные акции США", items: [
+        { sym: "TSLA", name: "Tesla", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "AAPL", name: "Apple", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "NVDA", name: "Nvidia", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "AMZN", name: "Amazon", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "META", name: "Meta", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "MSFT", name: "Microsoft", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "AMD", name: "AMD", tick: "×100 акций", stop: "", take: "", href: "" },
+        { sym: "GOOGL", name: "Alphabet", tick: "×100 акций", stop: "", take: "", href: "" }
       ] }
     ]
   },
@@ -662,10 +684,10 @@ function renderIntro() {
     S.groups.map(g => `<div class="ig"><span class="gl">${g.title}</span><div class="chips">${g.items.map(chip).join("")}</div></div>`).join(""));
   const row = (k, v) => `<div><dt>${k}</dt><dd>${v || "—"}</dd></div>`;
   const card = (i, lbl) => {
-    const tag = i.href ? "a" : "div", chip = i.live ? "Результаты ниже" : i.href ? "Статистика →" : "Скоро";
-    return `<${tag} class="inst${i.live ? " live" : ""}"${i.href ? ` href="${i.href}"` : ""}><div class="ih"><span class="sym">${i.sym}</span><span class="chip">${chip}</span></div><div class="iname">${i.name}</div><dl>${row(lbl, i.tick)}${row("Стоп-лосс", i.stop)}${row("Тейк-профит", i.take)}</dl></${tag}>`;
+    const tag = i.href ? "a" : "div", chip = i.live ? "Результаты ниже" : i.href ? "Статистика →" : "Потенциал";
+    return `<${tag} class="inst${i.live ? " live" : ""}"${i.href ? ` href="${i.href}"` : ""}><div class="ih"><span class="sym">${i.sym}</span><span class="chip">${chip}</span></div><div class="iname">${i.name}</div><dl>${row(lbl, i.tick)}${i.stop || i.take ? row("Стоп-лосс", i.stop) + row("Тейк-профит", i.take) : ""}</dl></${tag}>`;
   };
-  $("insts").innerHTML = S.groups.map(g => `<div class="grp"><h3>${g.title}</h3><p class="gnote">${g.note}</p><div class="icards">${g.items.map(i => card(i, g.tickLabel || "Тик")).join("")}</div></div>`).join("");
+  $("insts").innerHTML = `<div class="gh"><div class="gt">${S.scaleTitle}</div><p class="gnote">${S.scaleNote}</p></div>` + S.groups.map(g => `<div class="grp"><h3>${g.title}</h3><p class="gnote">${g.note}</p><div class="icards">${g.items.map(i => card(i, g.tickLabel || "Тик")).join("")}</div></div>`).join("");
 }
 renderIntro();
 document.addEventListener("click", e => { const b = $("instbox"); if (b && b.open && !b.contains(e.target)) b.open = false; });
