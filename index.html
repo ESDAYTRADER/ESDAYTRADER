@@ -81,8 +81,7 @@ a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline
 .ui.on{box-shadow:inset 0 -2px 0 var(--brass)}
 a.ui:hover{color:var(--brass)}
 .gh{padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--line)}
-.gt{font:400 15px Newsreader,Georgia,serif;color:var(--ink)}
-.gh .gnote{margin:4px 0 0}
+.gh .gnote{margin:0}
 .pos{color:var(--gain)}.neg{color:var(--loss)}
 .chartwrap{background:var(--panel);border:1px solid var(--line);padding:20px 20px 12px;position:relative}
 .tabs{display:flex;gap:4px;margin-bottom:8px}
@@ -223,10 +222,9 @@ const CONFIG = {
     execution: "Дискреционное исполнение по системным правилам",
     showSwitcher: false,   // true — показать плитки инструментов (ES, NQ, YM ...) в правой части карточки
     terms: [["TP", "10 тиков ($125)"], ["SL", "20 тиков ($250)"]],
-    specs: [["Торговое окно", "09:30–11:00 ET, <span class=\"nb\">Нью-Йорк</span>"], ["Объём", "1 контракт, без реинвестирования"], ["Стоимость тика", "$12,50"], ["Комиссия", "$4 за сделку, учтена"]],
+    specs: [["Торговое окно", "09:30–11:00 ET, NY"], ["Объём", "1 контракт, без реинвестирования"], ["Стоимость тика", "$12,50"], ["Комиссия", "$4 за сделку, учтена"]],
     // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
-    scaleTitle: "Витрина инструментов",
-    scaleNote: "Рынки, на которые применима стратегия. Результаты представлены только по ES.",
+    scaleNote: "Рынки, на которые применима стратегия. Помимо ES — на стадии исследования (quantitative research)",
     // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
     groups: [
       { title: "Фьючерсы · CME", items: [
@@ -692,7 +690,7 @@ function renderIntro() {
   if (S.showSwitcher) $("isw").insertAdjacentHTML("afterbegin", `<div class="rl"><span>Инструменты</span></div>` +
     S.groups.map(g => `<div class="ig"><span class="gl">${g.title}</span><div class="chips">${g.items.map(chip).join("")}</div></div>`).join(""));
   const item = i => { const t = i.href ? "a" : "div"; return `<${t} class="ui${i.live ? " on" : ""}"${i.href ? ` href="${i.href}"` : ""} title="${i.name || ""}">${i.sym}</${t}>`; };
-  $("insts").innerHTML = `<div class="gh"><div class="gt">${S.scaleTitle}</div><p class="gnote">${S.scaleNote}</p></div>` +
+  $("insts").innerHTML = `<div class="gh"><p class="gnote">${S.scaleNote}</p></div>` +
     `<div class="ug">${S.groups.map(g => `<div class="uc"><div class="ut">${g.title}</div>${g.items.map(item).join("")}</div>`).join("")}</div>`;
 }
 renderIntro();
