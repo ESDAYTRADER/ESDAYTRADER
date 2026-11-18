@@ -671,7 +671,7 @@ function tables() {
 }
 $("sTabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { statView = b.dataset.v; stats(periods(statView)); } });
 /* ---------- календарь P&L: недели / дни / месяцы ---------- */
-let calView = "week", calMonth = null;
+let calView = "day", calMonth = null;
 const MONF = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
 const MON3 = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
 const DOW = ["Пн","Вт","Ср","Чт","Пт"];
