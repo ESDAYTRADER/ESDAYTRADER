@@ -29,6 +29,50 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .numrow{display:flex;align-items:flex-end;flex-wrap:wrap;gap:6px 30px;margin:20px 0 26px}
 #total{font:400 clamp(44px,5.2vw,80px)/1 Newsreader,Georgia,serif;letter-spacing:-.02em;margin:0}
 .nb{white-space:nowrap}
+.cal{position:relative;background:var(--panel);border:1px solid var(--line);padding:6px 22px 12px}
+.cal::before{content:"";position:absolute;left:-1px;top:-1px;width:64px;height:2px;background:var(--brass)}
+.cal-scroll{max-height:620px;overflow:auto}
+.wk-h,.wk{display:flex;align-items:center;gap:14px}
+.wk-h{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);padding:12px 0 6px}
+.wk-h span:nth-child(1),.wk-l{width:150px;flex:none}
+.wk-h span:nth-child(2){flex:1}
+.wk-h span:nth-child(3),.wk-t{width:110px;flex:none;text-align:right}
+.wk-h span:nth-child(4),.wk-s{width:120px;flex:none;text-align:right}
+.wk{padding:7px 0;border-bottom:1px solid var(--line)}
+.wk-m{display:flex;justify-content:space-between;font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);padding:14px 0 6px;border-bottom:1px solid var(--line)}
+.wk-m span:last-child{letter-spacing:0;font-size:13px}
+.wk-l{font-size:12px;color:var(--mute)}
+.wk-d{flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.dc{border:1px solid var(--line);padding:5px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.dc span{font-size:10px;color:var(--mute)}
+.dc b{font-weight:400;font-size:13px}
+.dc.off b{color:var(--mute)}
+.wk-t{font:400 21px Newsreader,Georgia,serif}
+.wk-s{font-size:11px;color:var(--mute)}
+.cm-h{display:flex;align-items:center;gap:14px;margin:10px 0 12px}
+.cm-h button{width:28px;height:28px;border:1px solid var(--line);background:none;color:var(--mute);cursor:pointer;font:inherit}
+.cm-h button:hover:not(:disabled){border-color:var(--brass);color:var(--ink)}
+.cm-h button:disabled{opacity:.35;cursor:default}
+.cm-t{font:400 24px Newsreader,Georgia,serif}
+.cm-n{margin-left:auto;font-size:12px;color:var(--mute)}
+.cm-s{font:400 26px Newsreader,Georgia,serif}
+.cm-g{display:grid;grid-template-columns:repeat(5,1fr) 1.15fr;gap:6px}
+.cm-w{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);padding:4px 0}
+.cm-w.br{color:var(--brass)}
+.cm-c{height:80px;box-sizing:border-box;border:1px solid var(--line);padding:8px 10px;display:flex;flex-direction:column;justify-content:space-between}
+.cm-c .a{display:flex;justify-content:space-between;font-size:11px;color:var(--mute)}
+.cm-c .v{font:400 20px Newsreader,Georgia,serif}
+.cm-c.e{border-style:dashed;opacity:.35}
+.cm-c.h{color:var(--mute);font-size:11px}
+.cm-c.t{background:var(--panel)}
+.cmo{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px 0 6px}
+.cmt{background:var(--panel);border:1px solid var(--line);padding:14px 16px 12px;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.cmt:hover{border-color:var(--brass)}
+.cmt .n{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
+.cmt .v{font:400 26px Newsreader,Georgia,serif;margin:6px 0 10px}
+.cmt .bars{display:flex;align-items:flex-end;gap:5px;height:36px}
+.cmt .bars i{flex:1;opacity:.85}
+.cmt .s{font-size:10.5px;color:var(--mute);margin-top:8px}
 .spec{margin-top:20px}
 .rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .rgrid.two{grid-template-columns:1fr}
@@ -132,6 +176,23 @@ html{-webkit-text-size-adjust:100%}
   .groups{grid-template-columns:1fr}
 }
 @media (max-width:640px){
+  .cal{padding:4px 12px 10px}
+  .wk-h{display:none}
+  .wk{flex-wrap:wrap;gap:6px 10px}
+  .wk-l{width:auto;flex:1}
+  .wk-t{width:auto}
+  .wk-d{order:3;flex-basis:100%}
+  .wk-s{display:none}
+  .dc{justify-content:center;padding:5px 2px}
+  .dc span{display:none}
+  .dc b{font-size:11px}
+  .cm-g{gap:4px}
+  .cm-c{height:64px;padding:6px 6px}
+  .cm-c .a span:last-child{display:none}
+  .cm-c .v{font-size:13px}
+  .cm-c.t .a{font-size:9px}
+  .cm-n{display:none}
+  .cmo{grid-template-columns:repeat(2,1fr)}
   .ug{grid-template-columns:repeat(2,1fr)}
   #cap{grid-template-columns:repeat(2,1fr)}
   .rgrid.two{grid-template-columns:1fr}
@@ -194,6 +255,10 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:v
 <h2 class="dh">Детальная таблица</h2>
 <div class="tabs" id="tblTabs"></div>
 <div class="tablewrap"><table class="num"><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+
+<h2 class="dh">Календарь P&amp;L</h2>
+<div class="tabs" id="calTabs"></div>
+<div class="cal" id="cal"></div>
 
 <footer id="disc"></footer>
 
@@ -601,6 +666,86 @@ function tables() {
     `<td class="${cls(p.pnl)}">${money(p.pnl)}</td><td>${money(p.cum)}</td>${cap ? `<td class="${cls(p.pnl)}">${pctS(p.pnl)}</td>` : ""}</tr>`).join("");
 }
 $("sTabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { statView = b.dataset.v; stats(periods(statView)); } });
+/* ---------- календарь P&L: недели / дни / месяцы ---------- */
+let calView = "week", calMonth = null;
+const MONF = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+const MON3 = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
+const DOW = ["Пн","Вт","Ср","Чт","Пт"];
+const mkey = t => { const d = new Date(t); return d.getUTCFullYear() + "-" + d2(d.getUTCMonth() + 1); };
+const mlabel = k => { const [y, m] = k.split("-"); return MONF[+m - 1] + " " + y; };
+const tintC = (v, mx) => { const a = (0.08 + Math.min(Math.abs(v) / mx, 1) * 0.26).toFixed(2); return v >= 0 ? `rgba(111,195,160,${a})` : `rgba(217,128,107,${a})`; };
+const wkStart = t => t - ((new Date(t).getUTCDay() + 6) % 7) * 864e5;
+const wkRange = m => { const a = new Date(m), b = new Date(m + 4 * 864e5); return a.getUTCMonth() === b.getUTCMonth() ? `${a.getUTCDate()}–${b.getUTCDate()} ${MON3[b.getUTCMonth()]}` : `${a.getUTCDate()} ${MON3[a.getUTCMonth()]} – ${b.getUTCDate()} ${MON3[b.getUTCMonth()]}`; };
+const sumOf = (ds, k) => ds.reduce((a, d) => a + (d ? d[k] || 0 : 0), 0);
+const monthKeys = () => [...new Set(days.map(d => mkey(d.t)))];
+function calWeeksData() {   // неделя Пн–Пт относится к месяцу, в котором она началась
+  const w = new Map();
+  for (const d of days) { const m = wkStart(d.t), i = Math.round((d.t - m) / 864e5); if (i > 4) continue; if (!w.has(m)) w.set(m, [null, null, null, null, null]); w.get(m)[i] = d; }
+  return [...w.entries()].sort((a, b) => a[0] - b[0]);
+}
+const maxDay = () => Math.max(...days.map(d => Math.abs(d.pnl)), 1) * 0.8;
+
+function calWeeks() {
+  const mx = maxDay(), groups = new Map();
+  for (const [m, ds] of calWeeksData()) { const k = mkey(m); if (!groups.has(k)) groups.set(k, []); groups.get(k).push([m, ds]); }
+  let h = `<div class="wk-h"><span>Неделя</span><span>Результат каждого дня недели</span><span>Итог</span>${has.trades ? "<span>Сделки · win</span>" : ""}</div>`;
+  for (const [k, ws] of [...groups.entries()].reverse()) {
+    const mt = ws.reduce((a, [, ds]) => a + sumOf(ds, "pnl"), 0);
+    h += `<div class="wk-m"><span>${mlabel(k)}</span><span class="${cls(mt)}">${money(mt)}</span></div>`;
+    for (const [m, ds] of ws.slice().reverse()) {
+      const pnl = sumOf(ds, "pnl"), tr = sumOf(ds, "trades"), wn = sumOf(ds, "win");
+      const cells = ds.map((d, i) => !d || (has.trades && !d.trades) ? `<div class="dc off"><span>${DOW[i]}</span><b>—</b></div>` : `<div class="dc" style="background:${tintC(d.pnl, mx)}"><span>${DOW[i]}</span><b class="${cls(d.pnl)}">${money(d.pnl)}</b></div>`).join("");
+      h += `<div class="wk"><div class="wk-l">${wkRange(m)}</div><div class="wk-d">${cells}</div><div class="wk-t ${cls(pnl)}">${money(pnl)}</div>${has.trades ? `<div class="wk-s">${tr} сд.${has.win && tr ? ` · ${Math.round(wn / tr * 100)}% win` : ""}</div>` : ""}</div>`;
+    }
+  }
+  return `<div class="cal-scroll">${h}</div>`;
+}
+
+function calDays() {
+  const dmap = new Map(days.map(d => [d.t, d])), keys = monthKeys(), mx = maxDay();
+  if (!keys.includes(calMonth)) calMonth = keys[keys.length - 1];
+  const idx = keys.indexOf(calMonth), [y, m] = calMonth.split("-").map(Number);
+  const first = Date.UTC(y, m - 1, 1), last = Date.UTC(y, m, 0);
+  const md = days.filter(d => mkey(d.t) === calMonth), mt = sumOf(md, "pnl");
+  const traded = md.filter(d => !has.trades || d.trades > 0), wins = traded.filter(d => d.pnl > 0).length;
+  let cells = DOW.map(w => `<div class="cm-w">${w}</div>`).join("") + `<div class="cm-w br">Неделя</div>`;
+  for (let mon = wkStart(first); mon <= last; mon += 7 * 864e5) {
+    let row = "", wt = 0, any = false;
+    for (let i = 0; i < 5; i++) {
+      const t = mon + i * 864e5;
+      if (t < first || t > last) { row += `<div class="cm-c e"></div>`; continue; }
+      any = true;
+      const d = dmap.get(t), n = new Date(t).getUTCDate();
+      if (!d || (has.trades && !d.trades)) { row += `<div class="cm-c h"><div class="a"><span>${n}</span></div><div>нет сделок</div></div>`; continue; }
+      wt += d.pnl;
+      row += `<div class="cm-c" style="background:${tintC(d.pnl, mx)}"><div class="a"><span>${n}</span>${has.trades ? `<span>${d.trades} сд.</span>` : ""}</div><div class="v ${cls(d.pnl)}">${money(d.pnl)}</div></div>`;
+    }
+    if (any) cells += row + `<div class="cm-c t"><div class="a"><span>${wkRange(mon)}</span></div><div class="v ${cls(wt)}">${money(wt)}</div></div>`;
+  }
+  return `<div class="cm-h"><button data-nav="-1" ${idx === 0 ? "disabled" : ""}>‹</button><span class="cm-t">${mlabel(calMonth)}</span><button data-nav="1" ${idx === keys.length - 1 ? "disabled" : ""}>›</button><span class="cm-n">Прибыльных дней ${wins} из ${traded.length}</span><span class="cm-s ${cls(mt)}">${money(mt)}</span></div><div class="cm-g">${cells}</div>`;
+}
+
+function calMonths() {
+  const weeks = calWeeksData(), now = new Date(), todayS = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const tiles = monthKeys().map(k => {
+    const [y, m] = k.split("-").map(Number), v = sumOf(days.filter(d => mkey(d.t) === k), "pnl");
+    const ws = weeks.filter(([mon]) => mkey(mon) === k).map(([, ds]) => sumOf(ds, "pnl")), mx = Math.max(...ws.map(Math.abs), 1);
+    const part = Date.UTC(y, m, 1) > todayS;
+    return `<button class="cmt" data-m="${k}"><div class="n">${MONF[m - 1]}${part ? " · неполный" : ""}</div><div class="v ${cls(v)}">${money(v)}</div><div class="bars">${ws.map(x => `<i style="height:${Math.max(4, Math.abs(x) / mx * 34)}px;background:${x >= 0 ? "var(--gain)" : "var(--loss)"}"></i>`).join("")}</div><div class="s">недели · ${ws.length}</div></button>`;
+  });
+  return `<div class="cmo">${tiles.join("")}</div>`;
+}
+
+function renderCal() {
+  $("calTabs").innerHTML = Object.entries(UNITS).map(([k, x]) => `<button data-v="${k}" aria-pressed="${k === calView}">${x.tab}</button>`).join("");
+  $("cal").innerHTML = calView === "week" ? calWeeks() : calView === "day" ? calDays() : calMonths();
+}
+$("calTabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { calView = b.dataset.v; renderCal(); } });
+$("cal").addEventListener("click", e => {
+  const n = e.target.closest("[data-nav]"), t = e.target.closest("[data-m]");
+  if (n && !n.disabled) { const keys = monthKeys(); calMonth = keys[keys.indexOf(calMonth) + +n.dataset.nav]; renderCal(); }
+  if (t) { calMonth = t.dataset.m; calView = "day"; renderCal(); }
+});
 $("tblTabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { tblView = b.dataset.v; tables(); } });
 let metric = "cum";
 const METRICS = { cum: "Cumulative P&L", pnl: "P&L", ticks: "Total ticks", trades: "Trades", wl: "Win / Loss", wr: "Win rate" };
@@ -662,15 +807,15 @@ async function load() {
   if (days.length < 2) {
     if (CONFIG.sheetCsvUrl) {   // реальный сайт: демо-цифры не показываем никогда
       $("status").textContent = ""; $("err").textContent = note || ("Не удалось прочитать данные из таблицы" + (dbg && dbg.problem ? ": " + dbg.problem : "") + ". Откройте страницу с ?debug для диагностики.");
-      document.querySelectorAll(".result, .spec, .chartwrap, .dh, #stats, #dstats, #tblTabs, .tablewrap").forEach(e => e.style.display = "none");
+      document.querySelectorAll(".result, .spec, .chartwrap, .dh, #stats, #dstats, #tblTabs, .tablewrap, #calTabs, .cal").forEach(e => e.style.display = "none");
       showDebug(); setTimeout(load, 10 * 60000); return;
     }
     days = demoData(); note = note || "Демо-данные.";
   }
-  document.querySelectorAll(".result, .spec, .chartwrap, .dh, #stats, #dstats, #tblTabs, .tablewrap").forEach(e => e.style.display = "");
+  document.querySelectorAll(".result, .spec, .chartwrap, .dh, #stats, #dstats, #tblTabs, .tablewrap, #calTabs, .cal").forEach(e => e.style.display = "");
   $("err").textContent = ""; $("status").textContent = note || "(данные обновляются раз в сутки)";
   showDebug();
-  render(); tables();
+  render(); tables(); renderCal();
   setTimeout(load, Math.min(next - Date.now() + 5000, 2 ** 31 - 1));
 }
 
