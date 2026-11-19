@@ -21,7 +21,6 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .eyebrow{color:var(--brass);font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
 .name{font:400 clamp(34px,4.6vw,66px)/1 Newsreader,Georgia,serif;margin:0;letter-spacing:-.02em}
 .result{position:relative;background:var(--panel);border:1px solid var(--line);padding:30px 32px 22px}
-.result::before{content:"";position:absolute;left:-1px;top:-1px;width:64px;height:2px;background:var(--brass)}
 .rl{display:flex;align-items:center;gap:14px;color:var(--brass);font-size:12px;letter-spacing:.22em;text-transform:uppercase}
 .rl::before{content:"";width:28px;height:1px;background:var(--brass)}
 .tag{font-style:normal;color:var(--ink);border:1px solid var(--brass);padding:2px 9px;letter-spacing:.14em}
@@ -75,6 +74,8 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .cmt .v{font:400 26px Newsreader,Georgia,serif;margin:6px 0 10px}
 .cmt .bars{position:relative;display:flex;gap:5px;height:40px}
 .cmt .bars span{flex:1;position:relative}
+.cmt .bars span::after{content:attr(data-t);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--bg);border:1px solid var(--line);padding:5px 9px;font-size:11px;color:var(--ink);opacity:0;pointer-events:none;z-index:6}
+.cmt .bars span:hover::after{opacity:1}
 .cmt .bars u{position:absolute;left:0;right:0;height:1px;background:var(--line);text-decoration:none}
 .cmt .bars i{position:absolute;left:0;right:0;opacity:.85}
 .cmt .s{font-size:10.5px;color:var(--mute);margin-top:8px}
@@ -121,11 +122,16 @@ a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline
 .instbox summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 4px;transition:transform .2s}
 .instbox[open] .chev{transform:rotate(-135deg);margin-top:3px}
-.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(900px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:block;margin:0;padding:16px 20px 12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(760px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:block;margin:0;padding:16px 20px 12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
 .gnote{color:var(--mute);font-size:10.5px;margin:0 0 10px}
-.ug{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.ug{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.ug.n2{grid-template-columns:repeat(2,1fr)}
+.ug.n3{grid-template-columns:repeat(3,1fr)}
+.us-t{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:14px 0 8px}
+.us-t:first-of-type{margin-top:0}
+.ui.more{color:var(--mute);font-style:italic}
 .uc{background:var(--panel);padding:12px 14px 6px}
-.ut{font:500 9.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:10px;min-height:28px}
+.ut{font:500 9.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:10px}
 .ui{display:inline-block;margin:0 14px 7px 0;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:.02em}
 .ui.on{box-shadow:inset 0 -2px 0 var(--brass)}
 a.ui:hover{color:var(--brass)}
@@ -171,7 +177,6 @@ html{-webkit-text-size-adjust:100%}
   .isw .rgrid.two > div{margin:0;padding:16px 0}
 }
 @media (max-width:900px){
-  .ug{grid-template-columns:repeat(3,1fr)}
   .instbox{position:static}
   .rl .groups{left:0;right:0;width:auto;top:64px}
 }
@@ -198,7 +203,7 @@ html{-webkit-text-size-adjust:100%}
   .cm-c.t .a{font-size:9px}
   .cm-n{display:none}
   .cmo{grid-template-columns:repeat(2,1fr)}
-  .ug{grid-template-columns:repeat(2,1fr)}
+  .ug.n3{grid-template-columns:1fr}
   #cap{grid-template-columns:repeat(2,1fr)}
   .rgrid.two{grid-template-columns:1fr}
   body{padding:0 14px 36px}
@@ -297,32 +302,32 @@ const CONFIG = {
     scaleNote: "Остальные рынки — на стадии исследования (quantitative research)",
     // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
     groups: [
-      { title: "Фьючерсы · CME", items: [
+      { section: "Фьючерсы", title: "CME", items: [
         { sym: "ES", name: "E-mini S&P 500", live: true, href: "" },
         { sym: "NQ", name: "E-mini Nasdaq-100", href: "" },
         { sym: "YM", name: "E-mini Dow Jones", href: "" }
       ] },
-      { title: "Фьючерсы · Eurex", items: [
+      { section: "Фьючерсы", title: "Eurex", items: [
         { sym: "FDAX", name: "DAX", href: "" },
         { sym: "FESX", name: "EURO STOXX 50", href: "" },
         { sym: "FGBL", name: "Euro-Bund, Германия", href: "" },
         { sym: "FBTP", name: "Euro-BTP, Италия", href: "" },
         { sym: "FOAT", name: "Euro-OAT, Франция", href: "" }
       ] },
-      { title: "Опционы 0DTE · индексы", items: [
+      { section: "Опционы 0DTE", title: "Индексы", items: [
         { sym: "SPX", name: "S&P 500", href: "" },
         { sym: "NDX", name: "Nasdaq-100", href: "" },
         { sym: "RUT", name: "Russell 2000", href: "" },
         { sym: "XSP", name: "Mini-SPX", href: "" }
       ] },
-      { title: "Опционы 0DTE · ETF", items: [
+      { section: "Опционы 0DTE", title: "ETF", items: [
         { sym: "SPY", name: "S&P 500", href: "" },
         { sym: "QQQ", name: "Nasdaq-100", href: "" },
         { sym: "IWM", name: "Russell 2000", href: "" },
         { sym: "XLF", name: "Financial Select Sector", href: "" },
         { sym: "IBIT", name: "iShares Bitcoin Trust", href: "" }
       ] },
-      { title: "Опционы 0DTE · акции", items: [
+      { section: "Опционы 0DTE", title: "Акции", more: "и др.", items: [
         { sym: "NVDA", name: "Nvidia", href: "" },
         { sym: "TSLA", name: "Tesla", href: "" },
         { sym: "AAPL", name: "Apple", href: "" },
@@ -732,10 +737,10 @@ function calMonths() {
   const weeks = calWeeksData(), now = new Date(), todayS = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
   const tiles = monthKeys().map(k => {
     const [y, m] = k.split("-").map(Number), v = sumOf(days.filter(d => mkey(d.t) === k), "pnl");
-    const ws = weeks.filter(([mon]) => mkey(mon) === k).map(([, ds]) => sumOf(ds, "pnl"));
+    const wi = weeks.filter(([mon]) => mkey(mon) === k).map(([mon, ds]) => ({ r: wkRange(mon), v: sumOf(ds, "pnl"), tr: sumOf(ds, "trades") })), ws = wi.map(x => x.v);
     const up = Math.max(...ws.filter(x => x > 0), 0), dn = Math.max(...ws.filter(x => x < 0).map(Math.abs), 0), range = (up + dn) || 1, H = 40, base = dn / range * H;   // нулевая линия: плюс выше, минус ниже
     const part = Date.UTC(y, m, 1) > todayS;
-    return `<button class="cmt" data-m="${k}"><div class="n">${MONF[m - 1]}${part ? " · неполный" : ""}</div><div class="v ${cls(v)}">${money(v)}</div><div class="bars"><u style="bottom:${base}px"></u>${ws.map(x => { const h = Math.max(3, Math.abs(x) / range * H); return `<span><i style="height:${h}px;bottom:${x >= 0 ? base : base - h}px;background:${x >= 0 ? "var(--gain)" : "var(--loss)"}"></i></span>`; }).join("")}</div><div class="s">недели · ${ws.length}</div></button>`;
+    return `<button class="cmt" data-m="${k}"><div class="n">${MONF[m - 1]}${part ? " · неполный" : ""}</div><div class="v ${cls(v)}">${money(v)}</div><div class="bars"><u style="bottom:${base}px"></u>${ws.map((x, j) => { const h = Math.max(3, Math.abs(x) / range * H); return `<span data-t="${wi[j].r}: ${money(x)}${has.trades ? ` · ${wi[j].tr} сд.` : ""}"><i style="height:${h}px;bottom:${x >= 0 ? base : base - h}px;background:${x >= 0 ? "var(--gain)" : "var(--loss)"}"></i></span>`; }).join("")}</div><div class="s">недели · ${ws.length}</div></button>`;
   });
   return `<div class="cmo">${tiles.join("")}</div>`;
 }
@@ -840,7 +845,8 @@ function renderIntro() {
     S.groups.map(g => `<div class="ig"><span class="gl">${g.title}</span><div class="chips">${g.items.map(chip).join("")}</div></div>`).join(""));
   const item = i => { const t = i.href ? "a" : "div"; return `<${t} class="ui${i.live ? " on" : ""}"${i.href ? ` href="${i.href}"` : ""} title="${i.name || ""}">${i.sym}</${t}>`; };
   $("insts").innerHTML = `<div class="gh"><p class="gnote">${S.scaleNote}</p></div>` +
-    `<div class="ug">${S.groups.map(g => `<div class="uc"><div class="ut">${g.title}</div>${g.items.map(item).join("")}</div>`).join("")}</div>`;
+    (() => { const secs = []; for (const g of S.groups) { let sc = secs.find(x => x.t === g.section); if (!sc) secs.push(sc = { t: g.section, cols: [] }); sc.cols.push(g); }
+      return secs.map(sc => `<div class="us-t">${sc.t}</div><div class="ug n${sc.cols.length}">${sc.cols.map(g => `<div class="uc"><div class="ut">${g.title}</div>${g.items.map(item).join("")}${g.more ? `<span class="ui more">${g.more}</span>` : ""}</div>`).join("")}</div>`).join(""); })();
 }
 renderIntro();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignNote);
