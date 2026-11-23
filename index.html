@@ -98,14 +98,6 @@ header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
 .isw .rgrid.two{border:0;background:transparent;gap:0}
 .isw .rgrid.two > div{background:transparent;margin:0 -32px 0 -44px;padding:18px 32px 18px 44px}
 .isw .rgrid.two > div + div{border-top:1px solid var(--line)}
-.ig{display:flex;align-items:center;gap:14px;margin-top:16px}
-.gl{flex:none;width:122px;white-space:nowrap;font:500 10.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.ic{display:inline-block;padding:8px 16px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--mute);font:400 20px/1 Newsreader,Georgia,serif;text-decoration:none;transition:border-color .2s,color .2s}
-a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline:0}
-.ic.on{border-color:var(--brass);color:var(--ink);box-shadow:inset 0 -2px 0 var(--brass)}
-.ic.off{opacity:.55;cursor:default}
-.inote{margin:16px 0 0;color:var(--mute);font-size:12px;font-style:italic}
 .tip .tkp{color:var(--mute);margin-left:4px}
 .tk{padding-bottom:8px;border-left:1px solid var(--line);padding-left:26px}
 .tk:empty{display:none}
@@ -122,21 +114,21 @@ a.ic:hover,a.ic:focus-visible{border-color:var(--brass);color:var(--ink);outline
 .instbox summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 4px;transition:transform .2s}
 .instbox[open] .chev{transform:rotate(-135deg);margin-top:3px}
-.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(760px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:block;margin:0;padding:16px 20px 12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
-.gnote{color:var(--mute);font-size:10.5px;margin:0 0 10px}
-.ug{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.ug.n2{grid-template-columns:repeat(2,1fr)}
-.ug.n3{grid-template-columns:repeat(3,1fr)}
-.us-t{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:14px 0 8px}
-.us-t:first-of-type{margin-top:0}
-.ui.more{color:var(--mute);font-style:normal;font-size:9px}
-.uc{background:var(--panel);padding:12px 14px 6px}
-.ut{font:500 9.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:10px}
-.ui{display:inline-block;margin:0 14px 7px 0;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:.02em}
-.ui.on{box-shadow:inset 0 -2px 0 var(--brass)}
-a.ui:hover{color:var(--brass)}
-.gh{padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--line)}
-.gh .gnote{margin:0}
+.th{display:flex;gap:18px;padding:7px 0;border-bottom:1px solid var(--line)}
+.th span{width:110px;flex:none;font:500 9.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);padding-top:2px}
+.th p{margin:0;font-size:12px;line-height:1.55;color:var(--ink)}
+.us-t{font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:16px 0 8px}
+.ug{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);align-items:stretch;margin-bottom:8px}
+.uc{background:var(--panel);padding:12px 16px 6px}
+.uh{display:flex;justify-content:space-between;align-items:baseline;font:500 10px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);padding-bottom:6px;border-bottom:1px solid var(--line)}
+.uh i{font-style:normal;text-transform:none;letter-spacing:0;font-size:10.5px;font-weight:400;color:var(--mute)}
+.ur{display:flex;gap:14px;padding:9px 0 5px;border-bottom:1px solid var(--line)}
+.ur:last-child{border-bottom:0}
+.rl2{width:104px;flex:none;font:500 9.5px "IBM Plex Sans",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);padding-top:3px}
+.rt{flex:1}
+.ui{display:inline-block;margin:0 14px 4px 0;font-size:12px;color:var(--ink);letter-spacing:.02em}
+.ui.more{font-size:9px;color:var(--mute)}
+.groups{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(900px,calc(100vw - 28px));max-height:72vh;overflow:auto;display:block;margin:0;padding:16px 20px 12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.5)}
 .pos{color:var(--gain)}.neg{color:var(--loss)}
 .chartwrap{background:var(--panel);border:1px solid var(--line);padding:20px 20px 12px;position:relative}
 .tabs{display:flex;gap:4px;margin-bottom:8px}
@@ -203,7 +195,6 @@ html{-webkit-text-size-adjust:100%}
   .cm-c.t .a{font-size:9px}
   .cm-n{display:none}
   .cmo{grid-template-columns:repeat(2,1fr)}
-  .ug.n3{grid-template-columns:1fr}
   #cap{grid-template-columns:repeat(2,1fr)}
   .rgrid.two{grid-template-columns:1fr}
   body{padding:0 14px 36px}
@@ -225,7 +216,7 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:v
 </head>
 <body>
 <header>
-  <div class="brand">Globextrader</div>
+  <div class="brand">ES Day Trader</div>
   <div class="meta">Intraday Scalping Strategy</div>
 </header>
 
@@ -290,52 +281,33 @@ const CONFIG = {
   // Шапка сайта. Тексты, инструменты, стоп/тейк по каждому инструменту — всё меняется здесь.
   strategy: {
     eyebrow: "Торговая стратегия",
-    name: "Scalping Globextrader",
+    name: "ES Day Trader",
     typeLabel: "Тип торговли",
     ledeMain: "Внутридневной скальпинг",
     executionLabel: "Подход к исполнению",
     execution: "Дискреционное исполнение по системным правилам",
-    showSwitcher: false,   // true — показать плитки инструментов (ES, NQ, YM ...) в правой части карточки
+    live: { sym: "ES", name: "E-mini S&P 500" },   // инструмент, по которому показаны результаты
     terms: [["TP", "10 тиков ($125)"], ["SL", "20 тиков ($250)"]],
     specs: [["Торговое окно", "09:30–11:00 ET, NY"], ["Объём", "1 контракт, без реинвестирования"], ["Стоимость тика", "$12,50"], ["Комиссия", "$4 за сделку, учтена"]],
-    // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
-    scaleNote: "Остальные рынки — на стадии исследования (quantitative research)",
-    // href: ссылка на страницу со статистикой инструмента (когда появится); live: true — результаты уже на этой странице
-    groups: [
-      { section: "Фьючерсы", title: "CME", items: [
-        { sym: "ES", name: "E-mini S&P 500", live: true, href: "" },
-        { sym: "NQ", name: "E-mini Nasdaq-100", href: "" },
-        { sym: "YM", name: "E-mini Dow Jones", href: "" }
+    scaleCaption: "Потенциальные инструменты и рынки для масштабирования стратегии",
+    scaleTheses: [
+      ["Основа", "Базовая стратегия по ES, результаты публикуются ежедневно."],
+      ["Потенциал", "Подход может быть применён к другим ликвидным инструментам: фьючерсам CME и Eurex, опционам 0DTE."],
+      ["Что требуется", "Отдельное исследование каждого рынка: поведение цены, профиль волатильности, подбор параметров (quantitative research)."],
+      ["Для кого", "Хедж-фонды, family office, инвестиционные фонды, проп-трейдинговые компании."]
+    ],
+    // строка: [подпись, [тикеры], "хвост" (необязательно)]
+    scaleCols: [
+      { title: "Фьючерсы", note: "CME Group · Eurex", rows: [
+        ["Индексы", ["NQ", "YM", "FDAX", "FESX"]],
+        ["Металлы и нефть", ["GC", "SI", "CL"]],
+        ["Валюты", ["6E", "6B"]],
+        ["Облигации", ["FGBL", "FBTP", "FOAT"]]
       ] },
-      { section: "Фьючерсы", title: "Eurex", items: [
-        { sym: "FDAX", name: "DAX", href: "" },
-        { sym: "FESX", name: "EURO STOXX 50", href: "" },
-        { sym: "FGBL", name: "Euro-Bund, Германия", href: "" },
-        { sym: "FBTP", name: "Euro-BTP, Италия", href: "" },
-        { sym: "FOAT", name: "Euro-OAT, Франция", href: "" }
-      ] },
-      { section: "Опционы 0DTE", title: "Индексы", items: [
-        { sym: "SPX", name: "S&P 500", href: "" },
-        { sym: "NDX", name: "Nasdaq-100", href: "" },
-        { sym: "RUT", name: "Russell 2000", href: "" },
-        { sym: "XSP", name: "Mini-SPX", href: "" }
-      ] },
-      { section: "Опционы 0DTE", title: "ETF", items: [
-        { sym: "SPY", name: "S&P 500", href: "" },
-        { sym: "QQQ", name: "Nasdaq-100", href: "" },
-        { sym: "IWM", name: "Russell 2000", href: "" },
-        { sym: "XLF", name: "Financial Select Sector", href: "" },
-        { sym: "IBIT", name: "iShares Bitcoin Trust", href: "" }
-      ] },
-      { section: "Опционы 0DTE", title: "Акции", more: "и др.", items: [
-        { sym: "NVDA", name: "Nvidia", href: "" },
-        { sym: "TSLA", name: "Tesla", href: "" },
-        { sym: "AAPL", name: "Apple", href: "" },
-        { sym: "AMZN", name: "Amazon", href: "" },
-        { sym: "META", name: "Meta", href: "" },
-        { sym: "MSFT", name: "Microsoft", href: "" },
-        { sym: "GOOGL", name: "Alphabet", href: "" },
-        { sym: "AVGO", name: "Broadcom", href: "" }
+      { title: "Опционы 0DTE", note: "Биржи США · клиринг OCC", rows: [
+        ["Индексы", ["SPX", "NDX", "RUT", "XSP"]],
+        ["ETF", ["SPY", "QQQ", "IWM", "XLF", "IBIT"]],
+        ["Акции", ["NVDA", "TSLA", "AAPL", "AMZN", "META", "MSFT", "GOOGL", "AVGO", "AMD", "NFLX", "PLTR", "COIN", "MSTR", "MU", "INTC", "JPM", "BA", "ORCL"], "и др."]
       ] }
     ]
   },
@@ -831,22 +803,16 @@ async function load() {
 function renderIntro() {
   const S = CONFIG.strategy;
   document.title = S.name + " — результаты";
-  const live = S.groups.flatMap(g => g.items).find(i => i.live) || {};
+  const live = S.live || {};
   $("rinst").textContent = live.name ? `(Фьючерс на ${live.name})` : "";   // что за инструмент — в строке заголовка результата
   $("curInst").textContent = live.sym || "";
   $("fixed").innerHTML = [[S.typeLabel, S.ledeMain], [S.executionLabel, S.execution]].map(c => `<div><span>${c[0]}</span><b>${c[1]}</b></div>`).join("");   // статичные описания стратегии
   const cells = [["Период", `<b id="period">—</b>`]].concat(S.specs.map(p => [p[0], `<b>${p[1]}</b>`]));
   cells.push(["Условия сделки", S.terms.map(t => `<p class="sp"><i>${t[0]}</i><b>${t[1]}</b></p>`).join("")]);
   $("cap").innerHTML = cells.map(c => `<div><span>${c[0]}</span>${c[1]}</div>`).join("");
-  // переключатель инструментов: ссылка работает, как только у инструмента появляется href
-  const chip = i => i.live ? `<span class="ic on" aria-current="page" title="${i.name}">${i.sym}</span>`
-    : i.href ? `<a class="ic" href="${i.href}" title="${i.name}">${i.sym}</a>` : `<span class="ic off" title="${i.name}">${i.sym}</span>`;
-  if (S.showSwitcher) $("isw").insertAdjacentHTML("afterbegin", `<div class="rl"><span>Инструменты</span></div>` +
-    S.groups.map(g => `<div class="ig"><span class="gl">${g.title}</span><div class="chips">${g.items.map(chip).join("")}</div></div>`).join(""));
-  const item = i => { const t = i.href ? "a" : "div"; return `<${t} class="ui${i.live ? " on" : ""}"${i.href ? ` href="${i.href}"` : ""} title="${i.name || ""}">${i.sym}</${t}>`; };
-  $("insts").innerHTML = `<div class="gh"><p class="gnote">${S.scaleNote}</p></div>` +
-    (() => { const secs = []; for (const g of S.groups) { let sc = secs.find(x => x.t === g.section); if (!sc) secs.push(sc = { t: g.section, cols: [] }); sc.cols.push(g); }
-      return secs.map(sc => `<div class="us-t">${sc.t}</div><div class="ug n${sc.cols.length}">${sc.cols.map(g => `<div class="uc"><div class="ut">${g.title}</div>${g.items.map(item).join("")}${g.more ? `<span class="ui more">${g.more}</span>` : ""}</div>`).join("")}</div>`).join(""); })();
+  const th = S.scaleTheses.map(t => `<div class="th"><span>${t[0]}</span><p>${t[1]}</p></div>`).join("");
+  const col = c => `<div class="uc"><div class="uh"><span>${c.title}</span><i>${c.note}</i></div>${c.rows.map(r => `<div class="ur"><span class="rl2">${r[0]}</span><span class="rt">${r[1].map(x => `<span class="ui">${x}</span>`).join("")}${r[2] ? `<span class="ui more">${r[2]}</span>` : ""}</span></div>`).join("")}</div>`;
+  $("insts").innerHTML = th + `<div class="us-t">${S.scaleCaption}</div><div class="ug">${S.scaleCols.map(col).join("")}</div>`;
 }
 renderIntro();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignNote);
